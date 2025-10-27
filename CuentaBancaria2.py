@@ -1,21 +1,42 @@
-class CuentaBancaria:
-    tasa_interes = 0.05
+class CuentaBancaria: 
+    def __init__(self,  titular, saldo_inicial = 0):
+        self._titular=titular #atributo protegido
+        self._saldo=saldo_inicial #atributo protegido
+        self._activa=True
     
-    def __init__(self, titular, balance):
-        self.titular = titular
-        self.balance = balance
+    @property
+    
+    def saldo (self):
+        """Getter automatico se usa como un atributo"""
+        return self._saldo
+    
+    @property
+    
+    def titular (self):
+        return self._titular
+    
+    @titular.setter
+    
+    def titular (self, valor):
+        if len(valor) > 0:
+            self._titular = valor
+        else:
+            raise ValueError ("Titular no puede estar vacío.")
         
-    def ActTasa (self, NuevaTasa):
-        self.tasa_interes = NuevaTasa
-        
-    def MostrarInfo (self):
-        return f"\nEl titular de la cuenta es {self.titular}. \nSu balance actual es de ${self.balance} con una tasa de interés de ${self.tasa_interes}"
-     
-Cuenta1 = CuentaBancaria ("Daniela", 1000)
-Cuenta2 = CuentaBancaria ("David", 5000)
+    @property
+    
+    def esta_activa (self):
+        return self._activa
+    
+Cuenta1 = CuentaBancaria ("Daniela", 12504320)
+Cuenta2 = CuentaBancaria ("David")
 
-Cuenta1.ActTasa(0.1)
-Cuenta2.ActTasa(0.15)
+print("\n---------- CUENTA 1 ----------")
+print(Cuenta1.titular)
+print(Cuenta1.saldo)
+print(Cuenta1.esta_activa)
 
-print (Cuenta1.MostrarInfo())
-print (Cuenta2.MostrarInfo())
+print("\n---------- CUENTA 2 ----------")
+print(Cuenta2.titular)
+print(Cuenta2.saldo)
+print(Cuenta2.esta_activa)
